@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script href="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
-<body >
+<body>
     <div class="container" onload="create_link();">
         <h1>Welcome to public API</h1>
         <p>Here you will find all the public APIs you know about and those you didn't know existed</p>
@@ -30,19 +30,27 @@
     </div>
 
 <script>
-function create_link (){
-table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6];
-    value = td.innerText;
-    alert(td.innerText)
-    td.innerText = "<a href="+value+">"+value+"</a>"
+function changeValue (e){
+    var x = document.getElementsByTagName('a');
+
+    if(e.matches) {
+        for(var i = 0; i < x.length; i++) {
+            x[i].text ='here';
+        }
+    }
+    else {
+        for(var i = 0; i < x.length; i++) {
+            x[i].text =x[i].getAttribute('href');
+        }
     }
  }
+ var e = window.matchMedia("(max-width: 700px)")
+changeValue(e) // Call listener function at run time
+e.addListener(changeValue)
+//changeValue(e)
 
 
-    function myFunction() {
+function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
